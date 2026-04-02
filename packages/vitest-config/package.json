@@ -1,0 +1,30 @@
+{
+  "name": "@angusp/vitest-config",
+  "version": "0.0.0",
+  "description": "Shared Vitest config factories for @angusp projects",
+  "keywords": ["vitest", "vitest-config"],
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./react": "./react.js",
+    "./vue": "./vue.js"
+  },
+  "files": ["*.js"],
+  "peerDependencies": {
+    "vitest": ">=4.0.0",
+    "@vitejs/plugin-react": ">=6.0.0",
+    "@vitejs/plugin-vue": ">=6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vitejs/plugin-react": {
+      "optional": true
+    },
+    "@vitejs/plugin-vue": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

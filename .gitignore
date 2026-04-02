@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.turbo/
+*.log
+apps/docs/.vitepress/cache
+apps/docs/.vitepress/dist

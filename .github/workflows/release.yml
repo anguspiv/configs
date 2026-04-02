@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Required so changesets can push version commits back to the repo
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Create version PR or publish to npm
+        uses: changesets/action@v1
+        with:
+          # When changesets exist: opens/updates a "Version Packages" PR.
+          # When that PR is merged: runs this publish script.
+          publish: pnpm ci:publish
+          title: 'chore: version packages'
+          commit: 'chore: version packages'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Add NPM_TOKEN to your repository secrets:
+          # Settings → Secrets → Actions → New repository secret
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

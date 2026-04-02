@@ -1,0 +1,17 @@
+{
+  "name": "@angusp/tsconfig",
+  "version": "0.0.0",
+  "description": "Shared TypeScript configs for @angusp projects",
+  "keywords": ["tsconfig", "typescript"],
+  "license": "MIT",
+  "exports": {
+    "./base": "./base.json",
+    "./react": "./react.json",
+    "./vue": "./vue.json",
+    "./node": "./node.json"
+  },
+  "files": ["*.json", "!package.json"],
+  "publishConfig": {
+    "access": "public"
+  }
+}

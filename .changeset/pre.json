@@ -1,0 +1,12 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "@angusp/eslint-config": "0.0.0",
+    "@angusp/prettier-config": "0.0.0",
+    "@angusp/tsconfig": "0.0.0",
+    "@angusp/vite-config": "0.0.0",
+    "@angusp/vitest-config": "0.0.0"
+  },
+  "changesets": []
+}

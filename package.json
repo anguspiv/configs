@@ -1,0 +1,26 @@
+{
+  "name": "configs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,json,md}\" --ignore-path .gitignore",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "ci:publish": "node scripts/publish.js",
+    "lint:changesets": "node scripts/lint-changesets.js"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.0",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
+    "prettier": "^3.5.3",
+    "turbo": "^2.5.3"
+  },
+  "packageManager": "pnpm@10.7.0",
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowAny": ["eslint"]
+    }
+  }
+}
