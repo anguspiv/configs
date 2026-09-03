@@ -10,6 +10,12 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    # The repository default is read-only, and changesets/action must be able to
+    # push the version commit and open the "Version Packages" pull request.
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write # for npm provenance, and for OIDC publishing later
     steps:
       - uses: actions/checkout@v5
         with:
