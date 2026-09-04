@@ -1,8 +1,11 @@
 {
   "name": "@angusp/vite-config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Shared Vite config factories for @angusp projects",
-  "keywords": ["vite", "vite-config"],
+  "keywords": [
+    "vite",
+    "vite-config"
+  ],
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -10,7 +13,9 @@
     "./react": "./react.js",
     "./vue": "./vue.js"
   },
-  "files": ["*.js"],
+  "files": [
+    "*.js"
+  ],
   "peerDependencies": {
     "vite": ">=6.0.0",
     "@vitejs/plugin-react": ">=6.0.0",
