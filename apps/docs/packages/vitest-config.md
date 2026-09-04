@@ -32,34 +32,34 @@ Node.js environment. No framework plugin. Use for utility libraries or pure Type
 
 **Defaults:**
 
-| Option | Value |
-| --- | --- |
-| `globals` | `true` |
-| `environment` | `node` |
-| `coverage.provider` | `v8` |
-| `coverage.reporter` | `['text', 'lcov']` |
-| `coverage.exclude` | `['node_modules/', 'dist/']` |
+| Option              | Value                        |
+| ------------------- | ---------------------------- |
+| `globals`           | `true`                       |
+| `environment`       | `node`                       |
+| `coverage.provider` | `v8`                         |
+| `coverage.reporter` | `['text', 'lcov']`           |
+| `coverage.exclude`  | `['node_modules/', 'dist/']` |
 
 ```js
 // vitest.config.js
-import { createBaseConfig } from '@angusp/vitest-config'
+import { createBaseConfig } from "@angusp/vitest-config";
 
-export default createBaseConfig()
+export default createBaseConfig();
 ```
 
 With overrides:
 
 ```js
-import { createBaseConfig } from '@angusp/vitest-config'
+import { createBaseConfig } from "@angusp/vitest-config";
 
 export default createBaseConfig({
   test: {
-    include: ['src/**/*.test.ts'],
+    include: ["src/**/*.test.ts"],
     coverage: {
-      exclude: ['node_modules/', 'dist/', 'src/generated/'],
+      exclude: ["node_modules/", "dist/", "src/generated/"],
     },
   },
-})
+});
 ```
 
 ---
@@ -72,9 +72,9 @@ Extends `createBaseConfig`. Switches environment to `jsdom` and adds `@vitejs/pl
 
 ```js
 // vitest.config.js
-import { createReactConfig } from '@angusp/vitest-config/react'
+import { createReactConfig } from "@angusp/vitest-config/react";
 
-export default createReactConfig()
+export default createReactConfig();
 ```
 
 ---
@@ -87,9 +87,9 @@ Extends `createBaseConfig`. Switches environment to `jsdom` and adds `@vitejs/pl
 
 ```js
 // vitest.config.js
-import { createVueConfig } from '@angusp/vitest-config/vue'
+import { createVueConfig } from "@angusp/vitest-config/vue";
 
-export default createVueConfig()
+export default createVueConfig();
 ```
 
 ## Coverage

@@ -41,9 +41,9 @@ Plain JavaScript projects. No TypeScript rules.
 
 ```js
 // eslint.config.js
-import javascript from '@angusp/eslint-config/javascript'
+import javascript from "@angusp/eslint-config/javascript";
 
-export default [...javascript]
+export default [...javascript];
 ```
 
 ---
@@ -64,9 +64,9 @@ TypeScript projects. Extends the JavaScript preset.
 
 ```js
 // eslint.config.js
-import typescript from '@angusp/eslint-config/typescript'
+import typescript from "@angusp/eslint-config/typescript";
 
-export default [...typescript]
+export default [...typescript];
 ```
 
 ::: tip
@@ -88,9 +88,9 @@ Node.js TypeScript projects. Extends the TypeScript preset.
 
 ```js
 // eslint.config.js
-import node from '@angusp/eslint-config/node'
+import node from "@angusp/eslint-config/node";
 
-export default [...node]
+export default [...node];
 ```
 
 ---
@@ -100,12 +100,15 @@ export default [...node]
 React TypeScript projects. Extends the TypeScript preset.
 
 **Peer dependencies:**
+
 ```sh
 pnpm add -D eslint  # already required
 ```
+
 All React plugins are bundled as dependencies — no additional installs needed.
 
 **Adds:**
+
 - `eslint-plugin-react` flat recommended + JSX runtime config
 - `eslint-plugin-react-hooks` recommended-latest (ESLint 9 flat config)
 - `eslint-plugin-jsx-a11y` recommended
@@ -114,9 +117,9 @@ All React plugins are bundled as dependencies — no additional installs needed.
 
 ```js
 // eslint.config.js
-import react from '@angusp/eslint-config/react'
+import react from "@angusp/eslint-config/react";
 
-export default [...react]
+export default [...react];
 ```
 
 ---
@@ -126,6 +129,7 @@ export default [...react]
 Vue 3 TypeScript projects. Extends the TypeScript preset.
 
 **Adds:**
+
 - `eslint-plugin-vue` flat/recommended
 - `typescript-eslint` parser wired into Vue's `parserOptions.parser` for `<script lang="ts">` blocks
 
@@ -137,9 +141,9 @@ Vue 3 TypeScript projects. Extends the TypeScript preset.
 
 ```js
 // eslint.config.js
-import vue from '@angusp/eslint-config/vue'
+import vue from "@angusp/eslint-config/vue";
 
-export default [...vue]
+export default [...vue];
 ```
 
 ## Extending a Preset
@@ -148,27 +152,24 @@ Append your own rules after spreading the preset array:
 
 ```js
 // eslint.config.js
-import react from '@angusp/eslint-config/react'
+import react from "@angusp/eslint-config/react";
 
 export default [
   ...react,
   {
     rules: {
-      'no-console': 'error', // override from warn to error
+      "no-console": "error", // override from warn to error
     },
   },
-]
+];
 ```
 
 ## Ignoring Files
 
 ```js
 // eslint.config.js
-import react from '@angusp/eslint-config/react'
-import { defineConfig } from 'eslint'
+import react from "@angusp/eslint-config/react";
+import { defineConfig } from "eslint";
 
-export default defineConfig([
-  { ignores: ['dist/', 'coverage/'] },
-  ...react,
-])
+export default defineConfig([{ ignores: ["dist/", "coverage/"] }, ...react]);
 ```

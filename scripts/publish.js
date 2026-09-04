@@ -1,70 +1,113 @@
 #!/usr/bin/env node
 /**
- * Publishes all non-private workspace packages to npm with the correct dist-tag:
- *   - Prerelease versions (x.y.z-*) → "next"
- *   - Stable versions (x.y.z)       → "latest"
+ * Publishes all non-private workspace packages to npm.
  *
- * Idempotent: a version already on the registry is skipped rather than
- * attempted, so re-running a release — a retry, a re-triggered workflow, or a
- * version published by hand — succeeds instead of going red for no reason.
- * The check is an unauthenticated read, so a run with nothing left to do needs
- * no credentials at all.
+ * These packages use STAGED publishing: their trusted publisher connections
+ * allow `npm stage publish` only, not `npm publish`. CI stages each version and
+ * a human approves it in npm → Staged Packages before it reaches consumers.
+ * Running `pnpm publish` here would be rejected by the registry.
+ *
+ * Dist-tags: prerelease (x.y.z-*) → "next", stable (x.y.z) → "latest".
+ *
+ * Idempotent. A version that is already published OR already staged is skipped,
+ * so a re-run — a retry, a re-triggered workflow, a second push before
+ * approval — is a no-op rather than a duplicate or a failure. Both checks are
+ * unauthenticated reads, so a run with nothing to do needs no credentials.
  */
-import { execSync } from 'child_process'
-import { readFileSync, readdirSync, statSync } from 'fs'
-import { join } from 'path'
+import { execSync } from "child_process";
+import { readFileSync, readdirSync, statSync } from "fs";
+import { join } from "path";
 
-/** Whether this exact name@version already exists on the registry. */
+const PACKAGES_DIR = "packages";
+
+const read = (cmd, cwd) =>
+  execSync(cmd, { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"], cwd });
+
+/** Whether this exact name@version is already live on the registry. */
 function isPublished(name, version) {
   try {
-    const found = execSync(`npm view ${name}@${version} version`, {
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    }).trim()
-    return found === version
+    return read(`npm view ${name}@${version} version`).trim() === version;
   } catch {
-    // A 404 means the package or that version does not exist yet.
-    return false
+    // A 404 means the package, or that version, does not exist yet.
+    return false;
   }
 }
 
-const PACKAGES_DIR = 'packages'
+/**
+ * Whether this exact name@version is already staged awaiting approval.
+ *
+ * `npm stage list` rejects version specifiers, so the whole list for the
+ * package is fetched and matched here. The entry schema is undocumented and the
+ * list was empty when this was written, so the match is deliberately defensive:
+ * any string field equal to the version counts. Narrow it once a populated
+ * entry has been seen.
+ */
+function isStaged(name, version) {
+  try {
+    const entries = JSON.parse(read(`npm stage list ${name} --json`));
+    if (!Array.isArray(entries)) return false;
+    return entries.some((entry) =>
+      Object.values(entry ?? {}).some((value) => value === version),
+    );
+  } catch {
+    return false;
+  }
+}
 
 const packages = readdirSync(PACKAGES_DIR).filter((d) =>
   statSync(join(PACKAGES_DIR, d)).isDirectory(),
-)
+);
 
-let failed = false
-let skipped = 0
-let published = 0
+let failed = false;
+let staged = 0;
+let skipped = 0;
 
 for (const dir of packages) {
-  const pkgPath = join(PACKAGES_DIR, dir, 'package.json')
-  const { name, version, private: isPrivate } = JSON.parse(readFileSync(pkgPath, 'utf8'))
+  const pkgDir = join(PACKAGES_DIR, dir);
+  const {
+    name,
+    version,
+    private: isPrivate,
+  } = JSON.parse(readFileSync(join(pkgDir, "package.json"), "utf8"));
 
-  if (isPrivate) continue
+  if (isPrivate) continue;
 
   if (isPublished(name, version)) {
-    console.log(`\nSkipping ${name}@${version} — already on the registry`)
-    skipped += 1
-    continue
+    console.log(`Skipping ${name}@${version} — already published`);
+    skipped += 1;
+    continue;
   }
 
-  const isPrerelease = version.includes('-')
-  const tag = isPrerelease ? 'next' : 'latest'
+  if (isStaged(name, version)) {
+    console.log(
+      `Skipping ${name}@${version} — already staged, awaiting approval`,
+    );
+    skipped += 1;
+    continue;
+  }
 
-  console.log(`\nPublishing ${name}@${version} → tag: ${tag}`)
+  const tag = version.includes("-") ? "next" : "latest";
+
+  console.log(`\nStaging ${name}@${version} → tag: ${tag}`);
   try {
-    execSync(`pnpm publish --filter "${name}" --no-git-checks --tag ${tag}`, {
-      stdio: 'inherit',
-    })
-    published += 1
+    // Run from the package directory: `npm stage publish` reads the package.json
+    // in cwd, and npm cannot resolve pnpm workspaces via -w.
+    execSync(`npm stage publish --tag ${tag}`, {
+      stdio: "inherit",
+      cwd: pkgDir,
+    });
+    staged += 1;
   } catch {
-    console.error(`Failed to publish ${name}`)
-    failed = true
+    console.error(`Failed to stage ${name}`);
+    failed = true;
   }
 }
 
-console.log(`\n${published} published, ${skipped} already on the registry`)
+console.log(`\n${staged} staged, ${skipped} already published or staged`);
+if (staged > 0) {
+  console.log(
+    "Approve them at https://www.npmjs.com/settings/angusp/staged-packages",
+  );
+}
 
-if (failed) process.exit(1)
+if (failed) process.exit(1);

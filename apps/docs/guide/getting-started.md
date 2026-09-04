@@ -2,14 +2,14 @@
 
 ## Prerequisites
 
-| Tool | Minimum version |
-| --- | --- |
-| Node.js | 20 |
-| pnpm | 10 |
-| ESLint | 9 |
-| TypeScript | 5 |
-| Vite | 6 |
-| Vitest | 4 |
+| Tool       | Minimum version |
+| ---------- | --------------- |
+| Node.js    | 20              |
+| pnpm       | 10              |
+| ESLint     | 9               |
+| TypeScript | 5               |
+| Vite       | 6               |
+| Vitest     | 4               |
 
 ## Installation
 
@@ -69,9 +69,9 @@ Then wire up each config file:
 ::: code-group
 
 ```js [eslint.config.js]
-import react from '@angusp/eslint-config/react'
+import react from "@angusp/eslint-config/react";
 
-export default [...react]
+export default [...react];
 ```
 
 ```json [package.json]
@@ -89,15 +89,15 @@ export default [...react]
 ```
 
 ```js [vite.config.js]
-import { createReactConfig } from '@angusp/vite-config/react'
+import { createReactConfig } from "@angusp/vite-config/react";
 
-export default createReactConfig()
+export default createReactConfig();
 ```
 
 ```js [vitest.config.js]
-import { createReactConfig } from '@angusp/vitest-config/react'
+import { createReactConfig } from "@angusp/vitest-config/react";
 
-export default createReactConfig()
+export default createReactConfig();
 ```
 
 :::
@@ -118,9 +118,9 @@ pnpm add -D \
 ::: code-group
 
 ```js [eslint.config.js]
-import vue from '@angusp/eslint-config/vue'
+import vue from "@angusp/eslint-config/vue";
 
-export default [...vue]
+export default [...vue];
 ```
 
 ```json [tsconfig.json]
@@ -132,15 +132,15 @@ export default [...vue]
 ```
 
 ```js [vite.config.js]
-import { createVueConfig } from '@angusp/vite-config/vue'
+import { createVueConfig } from "@angusp/vite-config/vue";
 
-export default createVueConfig()
+export default createVueConfig();
 ```
 
 ```js [vitest.config.js]
-import { createVueConfig } from '@angusp/vitest-config/vue'
+import { createVueConfig } from "@angusp/vitest-config/vue";
 
-export default createVueConfig()
+export default createVueConfig();
 ```
 
 :::
@@ -158,9 +158,9 @@ pnpm add -D \
 ::: code-group
 
 ```js [eslint.config.js]
-import node from '@angusp/eslint-config/node'
+import node from "@angusp/eslint-config/node";
 
-export default [...node]
+export default [...node];
 ```
 
 ```json [tsconfig.json]
