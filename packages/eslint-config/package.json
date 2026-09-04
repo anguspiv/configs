@@ -1,8 +1,11 @@
 {
   "name": "@angusp/eslint-config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Shared ESLint flat configs for @angusp projects",
-  "keywords": ["eslint", "eslint-config"],
+  "keywords": [
+    "eslint",
+    "eslint-config"
+  ],
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -12,7 +15,9 @@
     "./react": "./react.js",
     "./vue": "./vue.js"
   },
-  "files": ["*.js"],
+  "files": [
+    "*.js"
+  ],
   "dependencies": {
     "typescript-eslint": "^8.0.0",
     "eslint-config-prettier": "^10.0.0",
