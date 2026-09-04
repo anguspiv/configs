@@ -1,3 +1,16 @@
+# NOTE: The "Version Packages" pull request this opens must be merged with
+# admin privileges — `gh pr merge <n> --squash --admin`.
+#
+# GitHub deliberately does not trigger workflows for events created by
+# GITHUB_TOKEN, so a bot-authored PR never gets check runs, and required status
+# checks on it can never pass. Its mergeState stays BLOCKED forever.
+#
+# This is accepted rather than worked around. The alternative is a long-lived
+# PAT so the PR triggers CI normally, which trades a permanent stored secret for
+# a gate on generated version bumps and CHANGELOGs — content CI would not
+# meaningfully validate. Branch protection keeps its real value: no force
+# pushes, no deletions, and required checks on human PRs.
+
 name: Release
 
 on:
