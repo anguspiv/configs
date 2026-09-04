@@ -1,4 +1,4 @@
-import { defineConfig, mergeConfig } from 'vitest/config'
+import { defineConfig, mergeConfig } from "vitest/config";
 
 /**
  * @param {import('vitest/config').UserConfig} [overrides]
@@ -9,14 +9,14 @@ export function createBaseConfig(overrides) {
     defineConfig({
       test: {
         globals: true,
-        environment: 'node',
+        environment: "node",
         coverage: {
-          provider: 'v8',
-          reporter: ['text', 'lcov'],
-          exclude: ['node_modules/', 'dist/'],
+          provider: "v8",
+          reporter: ["text", "lcov"],
+          exclude: ["node_modules/", "dist/"],
         },
       },
     }),
     overrides ?? {},
-  )
+  );
 }

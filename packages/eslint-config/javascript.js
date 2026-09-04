@@ -1,4 +1,4 @@
-import prettierConfig from 'eslint-config-prettier'
-import jsBase from './_javascript.js'
+import prettierConfig from "eslint-config-prettier";
+import jsBase from "./_javascript.js";
 
-export default [...jsBase, prettierConfig]
+export default [...jsBase, prettierConfig];

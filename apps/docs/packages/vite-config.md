@@ -26,30 +26,30 @@ Framework-agnostic base. Use for library packages or tools that don't need a fra
 
 **Defaults:**
 
-| Option | Value |
-| --- | --- |
+| Option         | Value    |
+| -------------- | -------- |
 | `build.target` | `esnext` |
 
 ```js
 // vite.config.js
-import { createBaseConfig } from '@angusp/vite-config'
+import { createBaseConfig } from "@angusp/vite-config";
 
-export default createBaseConfig()
+export default createBaseConfig();
 ```
 
 With overrides:
 
 ```js
-import { createBaseConfig } from '@angusp/vite-config'
+import { createBaseConfig } from "@angusp/vite-config";
 
 export default createBaseConfig({
   build: {
     lib: {
-      entry: 'src/index.ts',
-      formats: ['es'],
+      entry: "src/index.ts",
+      formats: ["es"],
     },
   },
-})
+});
 ```
 
 ---
@@ -62,20 +62,20 @@ Extends `createBaseConfig`. Pre-wires `@vitejs/plugin-react`.
 
 ```js
 // vite.config.js
-import { createReactConfig } from '@angusp/vite-config/react'
+import { createReactConfig } from "@angusp/vite-config/react";
 
-export default createReactConfig()
+export default createReactConfig();
 ```
 
 With overrides:
 
 ```js
-import { createReactConfig } from '@angusp/vite-config/react'
+import { createReactConfig } from "@angusp/vite-config/react";
 
 export default createReactConfig({
   server: { port: 3000 },
-  build: { outDir: 'build' },
-})
+  build: { outDir: "build" },
+});
 ```
 
 ---
@@ -88,9 +88,9 @@ Extends `createBaseConfig`. Pre-wires `@vitejs/plugin-vue`.
 
 ```js
 // vite.config.js
-import { createVueConfig } from '@angusp/vite-config/vue'
+import { createVueConfig } from "@angusp/vite-config/vue";
 
-export default createVueConfig()
+export default createVueConfig();
 ```
 
 ## How Overrides Merge
@@ -102,11 +102,11 @@ Overrides are passed to Vite's `mergeConfig`, which:
 - **Deep merges objects** — nested objects like `build` are merged recursively
 
 ```js
-import { createReactConfig } from '@angusp/vite-config/react'
-import svgr from 'vite-plugin-svgr'
+import { createReactConfig } from "@angusp/vite-config/react";
+import svgr from "vite-plugin-svgr";
 
 export default createReactConfig({
   // svgr is appended — @vitejs/plugin-react is still included
   plugins: [svgr()],
-})
+});
 ```

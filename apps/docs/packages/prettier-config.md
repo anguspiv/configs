@@ -10,14 +10,14 @@ pnpm add -D @angusp/prettier-config prettier
 
 ## Options
 
-| Option | Value | Rationale |
-| --- | --- | --- |
-| `semi` | `false` | No semicolons — cleaner diffs |
-| `singleQuote` | `true` | Single quotes for JS/TS strings |
+| Option          | Value   | Rationale                                                         |
+| --------------- | ------- | ----------------------------------------------------------------- |
+| `semi`          | `false` | No semicolons — cleaner diffs                                     |
+| `singleQuote`   | `true`  | Single quotes for JS/TS strings                                   |
 | `trailingComma` | `'all'` | Trailing commas everywhere — cleaner git diffs on multi-line args |
-| `printWidth` | `100` | Wider than Prettier's 80 default, narrower than common 120 |
-| `tabWidth` | `2` | 2 spaces |
-| `useTabs` | `false` | Spaces |
+| `printWidth`    | `100`   | Wider than Prettier's 80 default, narrower than common 120        |
+| `tabWidth`      | `2`     | 2 spaces                                                          |
+| `useTabs`       | `false` | Spaces                                                            |
 
 ## Usage
 
@@ -37,12 +37,12 @@ Use a `prettier.config.js` (or `.prettierrc.js`) when you need to override speci
 
 ```js
 // prettier.config.js
-import angusPrettier from '@angusp/prettier-config'
+import angusPrettier from "@angusp/prettier-config";
 
 export default {
   ...angusPrettier,
   printWidth: 120,
-}
+};
 ```
 
 ## ESLint Integration

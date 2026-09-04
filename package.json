@@ -20,7 +20,9 @@
   "packageManager": "pnpm@10.7.0",
   "pnpm": {
     "peerDependencyRules": {
-      "allowAny": ["eslint"]
+      "allowAny": [
+        "eslint"
+      ]
     }
   }
 }

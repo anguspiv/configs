@@ -1,4 +1,4 @@
-import { defineConfig, mergeConfig } from 'vite'
+import { defineConfig, mergeConfig } from "vite";
 
 /**
  * @param {import('vite').UserConfig} [overrides]
@@ -8,9 +8,9 @@ export function createBaseConfig(overrides) {
   return mergeConfig(
     defineConfig({
       build: {
-        target: 'esnext',
+        target: "esnext",
       },
     }),
     overrides ?? {},
-  )
+  );
 }
