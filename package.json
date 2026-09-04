@@ -15,7 +15,7 @@
     "@commitlint/cli": "^19.0.0",
     "@commitlint/config-conventional": "^19.0.0",
     "prettier": "^3.5.3",
-    "turbo": "^2.5.3"
+    "turbo": "^2.9.14"
   },
   "packageManager": "pnpm@10.7.0",
   "pnpm": {
@@ -23,6 +23,9 @@
       "allowAny": [
         "eslint"
       ]
+    },
+    "overrides": {
+      "vitepress>vite": "^6.4.3"
     }
   }
 }
