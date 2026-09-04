@@ -1,14 +1,20 @@
 {
   "name": "@angusp/prettier-config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Shared Prettier config for @angusp projects",
-  "keywords": ["prettier", "prettier-config"],
+  "keywords": [
+    "prettier",
+    "prettier-config"
+  ],
   "license": "MIT",
   "type": "module",
   "exports": {
     ".": "./index.js"
   },
-  "files": ["index.js", "index.json"],
+  "files": [
+    "index.js",
+    "index.json"
+  ],
   "peerDependencies": {
     "prettier": ">=3.0.0"
   },

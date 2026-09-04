@@ -1,8 +1,11 @@
 {
   "name": "@angusp/vitest-config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Shared Vitest config factories for @angusp projects",
-  "keywords": ["vitest", "vitest-config"],
+  "keywords": [
+    "vitest",
+    "vitest-config"
+  ],
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -10,7 +13,9 @@
     "./react": "./react.js",
     "./vue": "./vue.js"
   },
-  "files": ["*.js"],
+  "files": [
+    "*.js"
+  ],
   "peerDependencies": {
     "vitest": ">=4.0.0",
     "@vitejs/plugin-react": ">=6.0.0",
